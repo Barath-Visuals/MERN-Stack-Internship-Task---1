@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts, deleteProduct } from "../service/productApi";
 import ProductCard from "./productCard";
 
-export default function productList ({onEdit}) {
+export default function ProductList ({onEdit, refresh}) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -21,7 +21,7 @@ export default function productList ({onEdit}) {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [refresh]);
 
     const handleDelete = async (id) => {
         try{
@@ -38,28 +38,38 @@ export default function productList ({onEdit}) {
     };
 
     if(loading){
-        return <p>Loading products...</p>;
+        return <p className="text-center text-gray-500">Loading products...</p>;
     }
 
     if(error) {
-        return <p>{error}</p>;
+        return <p className="text-center text-red-500">{error}</p>;
     }
 
     return(
-        <div>
-            <h1>Products</h1>
+        <div className="flex-col">
+            <div className="mt-4 mb-2">
+                <h1 className="text-2xl font-medium text-gray-900">Products</h1>
+                <p className="text-sm text-gray-500">
+                    {products.length} product
+                    {products.length !== 1 && "s"}
+                </p>
+            </div>
 
             {products.length === 0 ? (
-                <p>No Products Found</p>
+                <div className="rounded-xl border border-dashed border-gray-300 bg-white p-12 text-center">
+                    <p className="text-gray-500">No Products Found</p>
+                </div>
             ):(
-                products.map((product) => 
-                    <ProductCard
-                        key={product._id}
-                        product={product}
-                        onEdit={onEdit}
-                        onDelete={handleDelete}
-                    />
-                )
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {products.map((product) => (
+                        <ProductCard
+                            key={product._id}
+                            product={product}
+                            onEdit={onEdit}
+                            onDelete={handleDelete}
+                        />
+                    ))}
+                </div>
             )}
         </div>
     );
