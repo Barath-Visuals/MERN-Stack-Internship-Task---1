@@ -65,13 +65,14 @@ export default function ProductList ({ onEdit, refresh, view = "management" }) {
                 <div className="overflow-hidden rounded-xl border border-slate-200">
                 <div className="overflow-x-auto">
                     <table className="w-full min-w-[760px] border-collapse text-left">
-                    <thead><tr className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500"><th className="px-5 py-4">Product name</th><th className="px-4 py-4">Category</th><th className="px-4 py-4">Price</th><th className="px-4 py-4">Description</th><th className="px-5 py-4 text-right">Action</th></tr></thead>
+                    <thead><tr className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500"><th className="px-5 py-4">Product name</th><th className="px-4 py-4">Category</th><th className="px-4 py-4">Price</th><th className="px-4 py-4">Description</th><th className="px-4 py-4">Seller</th><th className="px-5 py-4 text-right">Action</th></tr></thead>
                     <tbody className="divide-y divide-slate-100 bg-white">
                         {products.map((product) => <tr key={product._id} className="transition hover:bg-violet-50/40">
                         <td className="px-5 py-4"><div className="flex items-center gap-3"><img src={product.image} alt="" className="h-11 w-11 shrink-0 rounded-lg border border-slate-100 bg-slate-50 object-cover" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} /><span className="max-w-[190px] truncate text-sm font-semibold text-slate-800">{product.name}</span></div></td>
                         <td className="px-4 py-4"><span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">{product.category}</span></td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm font-semibold text-slate-700">₹{Number(product.price || 0).toLocaleString("en-IN")}</td>
                         <td className="max-w-[260px] px-4 py-4 text-xs text-slate-500"><p className="line-clamp-2">{product.description}</p></td>
+                        <td className="max-w-[260px] px-4 py-4 text-xs text-slate-500"><p className="line-clamp-2 truncate">{product.user.name}</p></td>
                         <td className="px-5 py-4"><div className="flex justify-end gap-2"><button onClick={() => onEdit(product)} className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-violet-200 hover:bg-violet-50 hover:text-violet-800">Edit</button><button disabled={deletingId === product._id} onClick={() => handleDelete(product)} className="rounded-lg border border-red-100 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-50 disabled:cursor-wait disabled:opacity-50">{deletingId === product._id ? "Deleting…" : "Delete"}</button></div></td>
                         </tr>)}
                     </tbody>
