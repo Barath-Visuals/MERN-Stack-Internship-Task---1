@@ -1,7 +1,7 @@
 export default function ProductCard ({product, onEdit, onDelete}) {
     return (
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm ">
-            <div className="h-52 w-full overflow-hidden bg-gray-100">
+            <div className=" w-full overflow-hidden bg-gray-100">
                 <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
             </div>
             <div className="p-5">

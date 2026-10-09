@@ -42,40 +42,39 @@ export default function App() {
   };
 
   return(
-    <div className="min-h-screen bg-gray-100 p-5">
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Product Management
-          </h1>
-          <p className="text-gray-500 mt-0.5">
-            Manage your product
-          </p>
-        </div>
-        <button
-          onClick={handleAddProduct}
-          className="rounded-lg bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+    <div className="min-h-screen p-6 flex">
+      <div className="p-4 bg-white rounded-2xl flex flex-col gap-4">
+        <div className="flex items-center justify-between p-4 rounded-lg
+          bg-[#E4EEFF50]"
         >
-          Add Product
-        </button>
-      </div>
-      {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm">
-            <div className="w-full max-w-3xl max-h-[90vh] overflow-y-auto scrollbar-none">
-                <ProductForm
-                    product={editingProduct}
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancel}
-                />
-            </div>
+            <h1 className="text-3xl font-medium text-[#5503DB]">
+              Product Management
+            </h1>
+          <button
+            onClick={handleAddProduct}
+            className="rounded-lg bg-[#5503DB] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#6e15ff] "
+          >
+            Add Product
+          </button>
         </div>
-      )}
+        {showForm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm">
+              <div className="w-full max-w-3xl max-h-[90vh] overflow-y-auto scrollbar-none">
+                  <ProductForm
+                      product={editingProduct}
+                      onSubmit={handleSubmit}
+                      onCancel={handleCancel}
+                  />
+              </div>
+          </div>
+        )}
 
-      <div className="mx-auto mt-8 max-w-7xl">
-        <ProductList
-          key={refresh}
-          onEdit={handleEdit}
-        />
+        <div className="p-4 bg-[#E4EEFF50] rounded-lg">
+          <ProductList
+            key={refresh}
+            onEdit={handleEdit}
+          />
+        </div>
       </div>
 
     </div>

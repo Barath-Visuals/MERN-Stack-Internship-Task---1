@@ -46,12 +46,13 @@ export default function ProductList ({onEdit, refresh}) {
     }
 
     return(
-        <div className="flex-col">
-            <div className="mt-4 mb-2">
-                <h1 className="text-2xl font-medium text-gray-900">Products</h1>
-                <p className="text-sm text-gray-500">
-                    {products.length} product
-                    {products.length !== 1 && "s"}
+        <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1">
+                <h1 className="text-3xl font-medium text-[#4daa57] w-fit bg-[#deffe2] p-1 rounded">
+                    {String(products.length).padStart(2, "0")}
+                </h1>
+                <p className="text-md font-medium text-gray-500">
+                    Products
                 </p>
             </div>
 
