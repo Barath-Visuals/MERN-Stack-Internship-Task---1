@@ -1,39 +1,17 @@
-export default function ProductCard ({product, onEdit, onDelete}) {
-    return (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm ">
-            <div className=" w-full overflow-hidden bg-gray-100">
-                <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
-            </div>
-            <div className="p-5">
-                <div className="mb-3 flex item-start justify-between gap-4">
-                    <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
-                        <p className="text-xs text-gray-500">{product.category}</p>
-                    </div>
-                    <p className="text-lg font-bold text-gray-500">₹{product.price}</p>
+export default function ProductCard({ product }) {
+  return (
+    <article className="group overflow-hidden rounded-2xl border border-slate-200 bg-white p-2.5 flex flex-col gap-2.5">
+        <div className="flex h-50 items-center justify-center overflow-hidden bg-slate-50 rounded-lg"><img src={product.image} alt={product.name} className="h-full w-full object-cover transition duration-300]" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} /></div>
+        <div className="flex flex-col">
+            <div className="flex flex-col items-start justify-between">
+                <span className="inline-flex rounded-sm bg-violet-50 px-1 py-0.5 text-xs font-semibold text-violet-700">{product.category}</span>
+                <div className="flex justify-between w-full">
+                    <h3 className="truncate text-sm font-semibold text-slate-900">{product.name}</h3>
+                    <p className="shrink-0 text-sm font-bold text-violet-800">₹{Number(product.price || 0).toLocaleString("en-IN")}</p>
                 </div>
-                <p className="mb-4 line-clamp-2 text-sm leading-6 text-gray-600">
-                    {product.description}
-                </p>
-                <p className="mb-4 text-xs text-gray-400">
-                    Added by: {product.user?.name}
-                </p>
-                <div className="flex gap-3">
-                    <button
-                        onClick={() => onEdit(product)}
-                        className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
-                    >
-                        Edit
-                    </button>
-
-                    <button
-                        onClick={() => onDelete(product._id)}
-                        className="flex-1 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"
-                    >
-                        Delete
-                    </button>
-                </div>
+                <p className="mt-2.5 line-clamp-3 text-xs  text-slate-500">{product.description}</p>
             </div>
         </div>
-    )
+    </article>
+  );
 }
